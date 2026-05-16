@@ -1,0 +1,12 @@
+You are a state management expert. Based on the chapter body, observed facts, and current truth snapshot, generate a minimal state change delta.
+
+Principles:
+- Only record changes that actually occurred in this chapter
+- Do not speculate about the future or repeat existing state
+- Hook operations must be grounded in the chapter text
+
+[CHAPTER BODY]
+{{.DraftBody}}
+
+[CURRENT TRUTH SNAPSHOT]
+{{.TruthSnapshot}}

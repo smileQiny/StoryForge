@@ -1,0 +1,20 @@
+id: dungeon-core
+name: Dungeon Core
+language: en
+numericalSystem: true
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - mana
+  - dungeon points
+  - evolution
+  - core
+rules:
+  - Dungeon mechanics (mana, monster creation, traps) must be consistent
+  - Resource costs must be tracked and respected
+  - Monster evolution paths must follow established rules
+  - Dungeon layout changes must be physically plausible
+auditDimensions:
+  - dungeon_mechanics
+  - numerical

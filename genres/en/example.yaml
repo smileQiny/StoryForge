@@ -1,0 +1,7 @@
+id: example-en
+name: Example EN
+language: en
+fatigueWords:
+  - example
+rules:
+  - Maintain narrative continuity

@@ -1,0 +1,20 @@
+id: progression-fantasy
+name: Progression Fantasy
+language: en
+numericalSystem: false
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - delve
+  - tapestry
+  - suddenly
+  - power washed over
+  - insurmountable
+  - overwhelming aura
+rules:
+  - Power progression must feel earned and consistent
+  - Training arcs must show realistic improvement curves
+  - Antagonist power levels must be established before confrontation
+  - Avoid sudden unexplained power jumps
+auditDimensions:
+  - power_scaling

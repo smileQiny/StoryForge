@@ -1,0 +1,1 @@
+function a(t){return Array.isArray(t)?t.length:0}function o(t){return{factCount:a(t?.facts),hookCount:a(t?.delta?.newHookCandidates),subplotCount:a(t?.delta?.subplotOps),emotionalArcCount:a(t?.delta?.emotionalArcOps),matrixCount:a(t?.delta?.characterMatrixOps)}}export{o as s};

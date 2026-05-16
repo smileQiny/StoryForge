@@ -1,0 +1,21 @@
+id: isekai
+name: Isekai
+language: en
+numericalSystem: false
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - truck-kun
+  - cheat skill
+  - overpowered
+  - harem
+  - reincarnated
+rules:
+  - World rules established early must remain consistent
+  - The protagonist's unique advantage must have defined limits
+  - Cultural differences between worlds should be acknowledged
+  - Avoid info-dumping world mechanics in dialogue
+auditDimensions:
+  - isekai_rules
+  - power_scaling

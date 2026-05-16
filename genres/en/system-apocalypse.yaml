@@ -1,0 +1,22 @@
+id: system-apocalypse
+name: System Apocalypse
+language: en
+numericalSystem: true
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - notification
+  - ding
+  - the system
+  - quest
+  - level up
+rules:
+  - System notifications must follow consistent formatting
+  - Apocalypse rules established early must remain consistent
+  - Monster difficulty must scale logically with the narrative
+  - Survivor group dynamics must be realistic
+auditDimensions:
+  - numerical
+  - power_scaling
+  - system_notification

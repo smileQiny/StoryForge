@@ -1,0 +1,19 @@
+id: romantasy
+name: Romantasy
+language: en
+numericalSystem: false
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - heart fluttered
+  - butterflies
+  - smoldering gaze
+  - chiseled jaw
+  - brooding
+rules:
+  - Romantic tension must develop organically
+  - Character chemistry must be established before romantic payoff
+  - Fantasy world rules must remain consistent even during romantic scenes
+  - Avoid sudden personality changes for romantic convenience
+auditDimensions: []

@@ -1,0 +1,31 @@
+id: xuanhuan
+name: 玄幻
+language: zh
+numericalSystem: true
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - 突然
+  - 忽然
+  - 顿时
+  - 瞬间
+  - 霎时
+  - 不由得
+  - 不禁
+  - 心中一动
+  - 眼中闪过
+  - 嘴角微扬
+  - 淡淡一笑
+  - 冷哼一声
+  - 身形一闪
+  - 气息波动
+  - 天地异象
+rules:
+  - 战力数值必须与已建立的体系保持一致，不得随意突破上限
+  - 修炼境界的突破需要合理的铺垫和代价
+  - 法宝、功法的能力边界一旦设定不得随意扩展
+  - 世界观中的规则（天道、禁忌等）必须自洽
+  - 避免主角无缘无故获得外挂式提升
+auditDimensions:
+  - power_scaling
+  - cultivation_realm

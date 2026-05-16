@@ -1,0 +1,20 @@
+id: tower-climber
+name: Tower Climber
+language: en
+numericalSystem: true
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - floor boss
+  - cleared
+  - reward
+  - notification
+rules:
+  - Tower floor rules must be consistent and fair
+  - Power progression must match floor difficulty
+  - Rewards must be proportional to challenge
+  - Floor mechanics once established cannot be arbitrarily changed
+auditDimensions:
+  - numerical
+  - power_scaling

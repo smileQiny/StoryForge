@@ -1,0 +1,13 @@
+【受控输入】
+本章目标：{{.Goal}}
+{{if .MustKeep}}必须保留：{{join .MustKeep "、"}}{{end}}
+{{if .MustAvoid}}必须避免：{{join .MustAvoid "、"}}{{end}}
+
+【上下文包】
+{{.ContextBundle}}
+
+【规则栈】
+{{.RuleStack}}
+
+【伏笔排班】
+{{.HookAgenda}}

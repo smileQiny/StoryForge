@@ -1,0 +1,18 @@
+id: sci-fi
+name: Science Fiction
+language: en
+numericalSystem: false
+powerScaling: false
+eraResearch: true
+fatigueWords:
+  - suddenly
+  - quantum
+  - nanobots
+  - AI overlord
+  - singularity
+rules:
+  - Scientific concepts must be internally consistent even if speculative
+  - Technology limitations must be respected once established
+  - Social implications of technology should be explored
+  - Avoid technobabble as a plot device
+auditDimensions: []

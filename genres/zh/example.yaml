@@ -1,0 +1,7 @@
+id: example-zh
+name: Example ZH
+language: zh
+fatigueWords:
+  - 示例
+rules:
+  - 保持叙事连续性

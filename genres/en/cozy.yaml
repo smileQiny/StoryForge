@@ -1,0 +1,18 @@
+id: cozy
+name: Cozy Fantasy
+language: en
+numericalSystem: false
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - cozy
+  - warm
+  - snug
+  - heartwarming
+rules:
+  - Conflict should be low-stakes and resolvable
+  - Community and relationships are central
+  - Magic (if present) should feel gentle and domestic
+  - Avoid dark or traumatic content
+auditDimensions: []

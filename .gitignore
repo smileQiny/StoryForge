@@ -1,0 +1,7 @@
+bin/
+dist/
+*.log
+*.pid
+.DS_Store
+!web/frontend/dist/
+!web/frontend/dist/index.html

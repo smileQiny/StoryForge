@@ -1,0 +1,11 @@
+You are a strict continuity auditor. Review the chapter below for continuity issues, logic errors, and quality problems.
+
+[CHAPTER BODY]
+{{.DraftBody}}
+
+[TRUTH SNAPSHOT]
+{{.TruthSnapshot}}
+
+[AUDIT DIMENSIONS]
+{{range .AuditDimensions}}- {{.}}
+{{end}}

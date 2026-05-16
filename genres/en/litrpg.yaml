@@ -1,0 +1,25 @@
+id: litrpg
+name: LitRPG
+language: en
+numericalSystem: true
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - delve
+  - tapestry
+  - mana
+  - stat window
+  - level up
+  - ding
+  - notification
+  - quest complete
+rules:
+  - Stat progression must be consistent with the established system
+  - Level-up notifications must follow the defined format
+  - Skills and abilities must respect their stated limitations
+  - Numbers (damage, HP, mana) must be internally consistent
+  - System messages must use consistent formatting
+auditDimensions:
+  - numerical
+  - power_scaling
+  - system_notification

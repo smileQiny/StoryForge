@@ -1,0 +1,21 @@
+id: cultivation
+name: Cultivation
+language: en
+numericalSystem: true
+powerScaling: true
+eraResearch: false
+fatigueWords:
+  - suddenly
+  - qi
+  - dao heart
+  - heavenly tribulation
+  - fate
+  - destiny
+rules:
+  - Cultivation realms must be clearly defined and consistently applied
+  - Breakthroughs require adequate preparation and cost
+  - Sect rules and power hierarchies must remain consistent
+  - Heavenly laws cannot be violated without consequence
+auditDimensions:
+  - cultivation_realm
+  - power_scaling

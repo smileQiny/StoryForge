@@ -1,0 +1,26 @@
+id: xianxia
+name: 仙侠
+language: zh
+numericalSystem: true
+powerScaling: true
+eraResearch: true
+fatigueWords:
+  - 突然
+  - 忽然
+  - 顿时
+  - 道心
+  - 天道意志
+  - 气运
+  - 命运齿轮
+  - 冥冥之中
+  - 天机不可泄露
+  - 缘分
+rules:
+  - 修仙境界（练气/筑基/金丹/元婴/化神等）必须严格遵守
+  - 渡劫、飞升等重大事件需要充分铺垫
+  - 仙器、法宝的品级与能力需保持一致
+  - 门派、宗门的规则和势力关系需自洽
+  - 天道规则不可随意违背，违背必有代价
+auditDimensions:
+  - cultivation_realm
+  - power_scaling

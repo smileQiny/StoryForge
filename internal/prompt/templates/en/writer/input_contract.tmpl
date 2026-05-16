@@ -1,0 +1,13 @@
+[CONTROLLED INPUT]
+Chapter Goal: {{.Goal}}
+{{if .MustKeep}}Must Keep: {{join .MustKeep ", "}}{{end}}
+{{if .MustAvoid}}Must Avoid: {{join .MustAvoid ", "}}{{end}}
+
+[CONTEXT BUNDLE]
+{{.ContextBundle}}
+
+[RULE STACK]
+{{.RuleStack}}
+
+[HOOK AGENDA]
+{{.HookAgenda}}

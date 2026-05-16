@@ -1,0 +1,14 @@
+id: other
+name: 其他
+language: zh
+numericalSystem: false
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - 突然
+  - 忽然
+  - 顿时
+rules:
+  - 保持叙事连续性
+  - 角色行为符合人设
+auditDimensions: []

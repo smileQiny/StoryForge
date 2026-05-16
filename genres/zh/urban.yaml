@@ -1,0 +1,23 @@
+id: urban
+name: 都市
+language: zh
+numericalSystem: false
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - 突然
+  - 忽然
+  - 顿时
+  - 大佬
+  - 神豪
+  - 打脸
+  - 装逼
+  - 逆袭
+  - 系统提示
+  - 叮
+rules:
+  - 现实世界的基本逻辑必须遵守
+  - 人物的社会关系和职业背景需保持一致
+  - 金钱、权力的获取需要合理解释
+  - 避免过度的"打脸"情节堆砌
+auditDimensions: []

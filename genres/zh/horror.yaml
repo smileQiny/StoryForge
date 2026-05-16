@@ -1,0 +1,20 @@
+id: horror
+name: 恐怖
+language: zh
+numericalSystem: false
+powerScaling: false
+eraResearch: false
+fatigueWords:
+  - 突然
+  - 忽然
+  - 毛骨悚然
+  - 不寒而栗
+  - 汗毛竖立
+  - 心跳加速
+  - 脊背发凉
+rules:
+  - 恐怖氛围需要通过细节积累，不要依赖突然的惊吓
+  - 怪物/鬼怪的规则一旦建立必须自洽
+  - 主角的心理状态变化需要合理铺垫
+  - 避免过度的血腥描写，以心理恐惧为主
+auditDimensions: []
