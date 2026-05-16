@@ -32,6 +32,22 @@ After startup, open:
 - `http://127.0.0.1:8080/healthz`
 - `http://127.0.0.1:8080/api/bootstrap`
 
+## TUI
+
+StoryForge includes a terminal UI that talks to the same HTTP API as Web Studio. Start the server, then run:
+
+```bash
+storyforge tui
+```
+
+The TUI defaults to `http://127.0.0.1:8080`. Use `--addr` only when connecting to a different server:
+
+```bash
+storyforge tui --addr http://127.0.0.1:18081
+```
+
+The TUI supports book creation, chapter viewing and editing, truth-file viewing and editing, write/draft/audit/revise/rewrite triggers, approval/rejection, exports, daemon controls, logs, doctor checks, model routes, profile tests, and genre catalog browsing.
+
 ## Frontend Development
 
 ```bash
@@ -88,4 +104,4 @@ See [`LICENSE.md`](./LICENSE.md) and [`COMMERCIAL-LICENSE.md`](./COMMERCIAL-LICE
 
 ## Release Automation
 
-Pushing a version tag such as `v1.0.0` runs the GitHub release workflow. The workflow builds platform archives, generates `checksums.txt`, and publishes them to GitHub Releases.
+Pushing a version tag such as `v0.2.0` runs the GitHub release workflow. The workflow builds platform archives, generates `checksums.txt`, and publishes them to GitHub Releases.

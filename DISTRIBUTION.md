@@ -43,7 +43,7 @@ The installer must:
 Use `STORYFORGE_VERSION` to install a specific release tag:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/smileQiny/StoryForge/main/install.sh | STORYFORGE_VERSION=v1.0.0 sh
+curl -fsSL https://raw.githubusercontent.com/smileQiny/StoryForge/main/install.sh | STORYFORGE_VERSION=v0.2.0 sh
 ```
 
 ## Package Managers

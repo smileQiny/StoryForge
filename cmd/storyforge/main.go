@@ -4,18 +4,28 @@ import (
 	"context"
 	"errors"
 	"net/http"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
 	"storyforge/internal/config"
 	"storyforge/internal/logging"
+	"storyforge/internal/tui"
 	"storyforge/web/api"
 )
 
 var version = "dev"
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "tui" {
+		if err := tui.Run(os.Args[2:]); err != nil {
+			_, _ = os.Stderr.WriteString(err.Error() + "\n")
+			os.Exit(1)
+		}
+		return
+	}
+
 	cfg := config.Load()
 	logger := logging.NewLogger(cfg.LogLevel)
 
