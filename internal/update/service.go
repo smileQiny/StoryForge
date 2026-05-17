@@ -215,39 +215,79 @@ func (s *Service) downloadAsset(ctx context.Context, asset releaseAsset, out str
 }
 
 func (s *Service) downloadURL(ctx context.Context, rawURL, accept, out string) error {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, rawURL, nil)
-	if err != nil {
-		return err
-	}
-	if accept != "" {
-		req.Header.Set("Accept", accept)
-	}
-	resp, err := s.client().Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
-		return fmt.Errorf("download failed: %s %s", resp.Status, strings.TrimSpace(string(body)))
-	}
 	if err := os.MkdirAll(filepath.Dir(out), 0o755); err != nil {
 		return err
 	}
 	tmp := out + ".part"
-	file, err := os.Create(tmp)
+	var lastErr error
+	for attempt := 0; attempt < 5; attempt++ {
+		req, err := http.NewRequestWithContext(ctx, http.MethodGet, rawURL, nil)
+		if err != nil {
+			return err
+		}
+		if accept != "" {
+			req.Header.Set("Accept", accept)
+		}
+		resumeFrom := partialSize(tmp)
+		if resumeFrom > 0 {
+			req.Header.Set("Range", fmt.Sprintf("bytes=%d-", resumeFrom))
+		}
+		resp, err := s.client().Do(req)
+		if err != nil {
+			lastErr = err
+			continue
+		}
+		if resp.StatusCode == http.StatusRequestedRangeNotSatisfiable && resumeFrom > 0 {
+			_ = resp.Body.Close()
+			if err := os.Rename(tmp, out); err != nil {
+				return err
+			}
+			return nil
+		}
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
+			_ = resp.Body.Close()
+			return fmt.Errorf("download failed: %s %s", resp.Status, strings.TrimSpace(string(body)))
+		}
+		flags := os.O_CREATE | os.O_WRONLY
+		if resumeFrom > 0 && resp.StatusCode == http.StatusPartialContent {
+			flags |= os.O_APPEND
+		} else {
+			flags |= os.O_TRUNC
+		}
+		file, err := os.OpenFile(tmp, flags, 0o644)
+		if err != nil {
+			_ = resp.Body.Close()
+			return err
+		}
+		_, copyErr := io.Copy(file, resp.Body)
+		closeErr := file.Close()
+		_ = resp.Body.Close()
+		if copyErr != nil {
+			lastErr = copyErr
+			continue
+		}
+		if closeErr != nil {
+			lastErr = closeErr
+			continue
+		}
+		if err := os.Rename(tmp, out); err != nil {
+			return err
+		}
+		return nil
+	}
+	if lastErr == nil {
+		lastErr = fmt.Errorf("download failed after retries")
+	}
+	return lastErr
+}
+
+func partialSize(path string) int64 {
+	info, err := os.Stat(path)
 	if err != nil {
-		return err
+		return 0
 	}
-	_, copyErr := io.Copy(file, resp.Body)
-	closeErr := file.Close()
-	if copyErr != nil {
-		return copyErr
-	}
-	if closeErr != nil {
-		return closeErr
-	}
-	return os.Rename(tmp, out)
+	return info.Size()
 }
 
 func (s *Service) executablePath() (string, error) {
