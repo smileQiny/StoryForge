@@ -18,6 +18,7 @@ StoryForge is a Studio-first long-form fiction generation system. It packages th
 - Run traces and stage-level observability for agent execution.
 - LLM profile support for OpenAI-compatible, Responses-style, and Anthropic-style providers.
 - Built-in Web Studio served from the same binary as the API server.
+- GitHub Releases update checks with in-app upgrade prompts and checksum-verified binary replacement.
 
 ## Quick Start
 
@@ -104,4 +105,4 @@ See [`LICENSE.md`](./LICENSE.md) and [`COMMERCIAL-LICENSE.md`](./COMMERCIAL-LICE
 
 ## Release Automation
 
-Pushing a version tag such as `v0.2.0` runs the GitHub release workflow. The workflow builds platform archives, generates `checksums.txt`, and publishes them to GitHub Releases.
+Pushing a version tag such as `v0.2.1` runs the GitHub release workflow. The workflow builds platform archives, generates `checksums.txt`, and publishes them to GitHub Releases.

@@ -21,6 +21,8 @@ import (
 	"storyforge/internal/store"
 )
 
+var BuildVersion = "dev"
+
 // Services bundles all application services needed by the API handlers.
 type Services struct {
 	BookStore      *store.BookStore
@@ -320,6 +322,11 @@ func NewHandlerWithServices(logger *slog.Logger, svc *Services, dataDir string) 
 	radarDoctorH := newRadarDoctorHandler(logger, repoRoot, dataDir, svc.Books, svc.Chapters, svc.Config)
 	router.Post("/api/radar/scan", radarDoctorH.scan)
 	router.Get("/api/doctor", radarDoctorH.doctor)
+
+	updateH := newUpdateHandler(BuildVersion)
+	router.Get("/api/version", updateH.version)
+	router.Get("/api/update/check", updateH.check)
+	router.Post("/api/update/install", updateH.install)
 
 	router.Handle("/*", spaHandler(frontendFS, logger))
 

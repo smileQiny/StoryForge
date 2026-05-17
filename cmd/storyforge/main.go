@@ -28,6 +28,7 @@ func main() {
 
 	cfg := config.Load()
 	logger := logging.NewLogger(cfg.LogLevel)
+	api.BuildVersion = version
 
 	handler, err := api.NewHandler(logger)
 	if err != nil {

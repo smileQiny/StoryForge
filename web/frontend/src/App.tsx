@@ -5,7 +5,7 @@ import { useSSE } from "./hooks/use-sse";
 import { useTheme } from "./hooks/use-theme";
 import { useI18n } from "./hooks/use-i18n";
 import { postApi, useApi } from "./hooks/use-api";
-import { Sun, Moon, MessageSquare, Wifi, WifiOff } from "lucide-react";
+import { DownloadCloud, MessageSquare, Moon, RefreshCw, Sun, Wifi, WifiOff, X } from "lucide-react";
 
 const Dashboard = lazy(() => import("./pages/Dashboard").then((module) => ({ default: module.Dashboard })));
 const BookDetail = lazy(() => import("./pages/BookDetail").then((module) => ({ default: module.BookDetail })));
@@ -90,15 +90,107 @@ function RouteFallback() {
   );
 }
 
+interface UpdateCheck {
+  readonly currentVersion: string;
+  readonly latestVersion: string;
+  readonly updateAvailable: boolean;
+  readonly releaseUrl?: string;
+}
+
+interface UpdateInstallResult {
+  readonly installedVersion: string;
+  readonly restartRequired: boolean;
+}
+
+function UpdateNotice({ update, onDismiss }: {
+  update: UpdateCheck;
+  onDismiss: () => void;
+}) {
+  const [installing, setInstalling] = useState(false);
+  const [installed, setInstalled] = useState<UpdateInstallResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const install = async () => {
+    setInstalling(true);
+    setError(null);
+    try {
+      const result = await postApi<UpdateInstallResult>("/update/install", { version: update.latestVersion });
+      setInstalled(result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setInstalling(false);
+    }
+  };
+
+  return (
+    <div className="border-b border-amber-500/25 bg-amber-500/10 px-4 py-3 md:px-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex min-w-0 gap-3">
+          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300">
+            <DownloadCloud size={16} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-foreground">
+              {installed
+                ? `StoryForge ${installed.installedVersion} installed`
+                : `StoryForge ${update.latestVersion} is available`}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {installed
+                ? "Restart the StoryForge process to use the updated binary."
+                : `Current version: ${update.currentVersion}. Upgrade uses GitHub Releases and verifies checksums before replacing the binary.`}
+            </p>
+            {error && <p className="mt-1 text-xs font-medium text-destructive">{error}</p>}
+          </div>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2">
+          {update.releaseUrl && !installed && (
+            <a
+              href={update.releaseUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Release notes
+            </a>
+          )}
+          {!installed && (
+            <button
+              onClick={install}
+              disabled={installing}
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+            >
+              {installing ? <RefreshCw size={13} className="animate-spin" /> : <DownloadCloud size={13} />}
+              {installing ? "Upgrading..." : "Upgrade"}
+            </button>
+          )}
+          <button
+            onClick={onDismiss}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+            aria-label="Dismiss update notice"
+            title="Dismiss"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function App() {
   const [route, setRoute] = useState<Route>({ page: "dashboard" });
   const sse = useSSE();
   const { theme, setTheme } = useTheme();
   const { t } = useI18n();
   const { data: project, refetch: refetchProject } = useApi<{ language: string; languageExplicit: boolean }>("/project");
+  const { data: updateCheck } = useApi<UpdateCheck>("/update/check");
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [ready, setReady] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [dismissedUpdate, setDismissedUpdate] = useState<string | null>(null);
 
   const isDark = theme === "dark";
 
@@ -140,6 +232,9 @@ export function App() {
       ? `book:${activeBookId}`
       : route.page;
   const routeLabel = getRouteLabel(route, t);
+  const shouldShowUpdate =
+    Boolean(updateCheck?.updateAvailable) &&
+    updateCheck?.latestVersion !== dismissedUpdate;
 
   if (!ready) {
     return (
@@ -208,6 +303,13 @@ export function App() {
             </button>
           </div>
         </header>
+
+        {shouldShowUpdate && updateCheck && (
+          <UpdateNotice
+            update={updateCheck}
+            onDismiss={() => setDismissedUpdate(updateCheck.latestVersion)}
+          />
+        )}
 
         <main className="flex-1 overflow-y-auto scroll-smooth">
           <div className="w-full max-w-6xl mx-auto px-4 py-8 md:px-8 lg:py-10 fade-in">
